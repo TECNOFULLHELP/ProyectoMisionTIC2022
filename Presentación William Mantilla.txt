@@ -4,4 +4,4 @@ Rol:		analista
 Correo:		william.mantilla14@gmail.com
 Celular:	3132910550
 Grupo:		Desarrollo de Soft C3-Grupos 37-38
-Saludo:		Un saludo para todos!!!
+Saludo:		Un saludo para todos!
