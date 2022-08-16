@@ -1,2 +1,7 @@
-Hola a todos mi nombre es Maicol Aristizabal y pertenezco al grupo 37 y 38 
-del ciclo 3 de programación, ...continuara
+Nombre:		Maicol Jacobo Aristizabal Obando
+No. Cedula:	1022410880
+Rol:		Scrum 
+Correo:		maristizabalo95@gmail.com
+Celular:	3112656136
+Grupo:		Desarrollo de Soft C3-Grupos 37-38
+Saludo:		Un saludo para todos!
