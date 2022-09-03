@@ -10,7 +10,7 @@ public class TecnofullhelpApplication {
         //SpringApplication.run(TecnofullhelpApplication.class, args);
 		//tarea 2
 
-
+		System.out.println("hola grupo");
 	}
 
 }
