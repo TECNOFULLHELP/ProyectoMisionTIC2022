@@ -42,6 +42,13 @@ public class Enterprise {
         this.updatedAt = updatedAt;
 
     }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getNit() {
         return nit;
@@ -94,6 +101,7 @@ public class Enterprise {
     @Override
     public String toString() {
         return "Enterprise{" +
+                ", id=" + id +
                 ", nit=" + nit +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
