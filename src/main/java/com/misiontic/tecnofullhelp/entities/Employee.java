@@ -1,13 +1,32 @@
 package com.misiontic.tecnofullhelp.entities;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+@Entity
 public class Employee {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @Column(name="name")
     private String name;
+    @Column(name="email")
     private String email;
+    @ManyToOne
+    @JoinColumn(name="id", insertable = false, updatable = false)
     private Enterprise enterprise;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Transaction> listTransaction;
+    @Column(name="role")
     private Enum_role role;
+
+    @Column(name="createdat")
+    private Date createdAT;
+
+    @Column(name="updatedat")
+    private Date updatedAt;
 
    public Employee(String name, String email, Enterprise enterprise, Enum_role role) {
         this.name = name;

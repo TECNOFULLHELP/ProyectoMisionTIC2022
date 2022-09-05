@@ -1,18 +1,36 @@
 package com.misiontic.tecnofullhelp.entities;
 
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
 public class Transaction {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @Column(name="id_employee")
+    private long id_employee;
+    @Column(name="amount")
     private float amount;
+
+    @Column(name="concept")
     private String concept;
-    Employee user;
+
+    @ManyToOne
+    @JoinColumn(name="id", insertable = false, updatable = false)
+    private Employee employee;
+
+    @Column(name="createdat")
+    private Date createdAT;
+
+    @Column(name="updatedat")
+    private Date updatedAt;
 
     public Transaction(float amount, String concept, Employee employee) {
         this.amount = amount;
         this.concept = concept;
-        this.user = employee;
+        this.employee = employee;
     }
 
     public float getAmount() {
@@ -32,11 +50,11 @@ public class Transaction {
     }
 
     public Employee getUser() {
-        return user;
+        return employee;
     }
 
     public void setUser(Employee user) {
-        this.user = user;
+        this.employee = user;
     }
 
     @Override
@@ -44,7 +62,7 @@ public class Transaction {
         return "Transaction{" +
                 "amount=" + amount +
                 ", concept='" + concept + '\'' +
-                ", employee=" + user.getName() +
+                ", employee=" + employee.getName() +
                 '}';
     }
 }
