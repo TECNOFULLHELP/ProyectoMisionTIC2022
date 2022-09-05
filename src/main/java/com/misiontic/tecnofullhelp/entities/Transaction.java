@@ -1,7 +1,7 @@
 package com.misiontic.tecnofullhelp.entities;
 
 
-import java.util.Date;
+import com.misiontic.tecnofullhelp.entities.Employee;
 
 public class Transaction {
 

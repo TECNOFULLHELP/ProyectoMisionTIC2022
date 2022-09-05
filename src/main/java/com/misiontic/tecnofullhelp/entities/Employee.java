@@ -1,7 +1,5 @@
 package com.misiontic.tecnofullhelp.entities;
 
-import java.util.Date;
-
 public class Employee {
 
     private String name;

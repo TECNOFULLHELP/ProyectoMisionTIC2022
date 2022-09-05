@@ -1,4 +1,4 @@
-package com.misiontic.tecnofullhelp.entities;
+package com.misiontic.tecnofullhelp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

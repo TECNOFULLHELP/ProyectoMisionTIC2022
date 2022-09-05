@@ -1,31 +1,59 @@
 package com.misiontic.tecnofullhelp.entities;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 
-
+@Entity
+@Table(name = "empresa")
 public class Enterprise {
 
-    private long nit;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
+    private long id;
+    @Column(name = "name", unique = true)
     private String name;
-    private String address;
+    @Column(name = "document", unique = true)
+    private String document;
+    @Column(name = "phone", nullable = false)
     private String phone;
+    @Column(name = "address", nullable = false)
+    private String address;
+    @OneToMany
+    @JoinColumn(name = "users")
+    private User[]  users;
+    @OneToMany
+    @JoinColumn(name = "transactions")
+    private Transaction[] transactions;
+    @Column(name = "create_At", nullable = false)
+    private Date createdAt;
+    @Column(name = "update_At", nullable = false)
+    private Date updatedAt;
 
     public Enterprise() {
     }
 
-    public Enterprise(long nit, String name, String address, String phone) {
-        this.nit = nit;
+    public Enterprise(long id, String name, String document, String phone, String address, User[] users, Transaction[] transactions, Date createdAt, Date updatedAt) {
+        this.id = id;
         this.name = name;
-        this.address = address;
+        this.document = document;
         this.phone = phone;
+        this.address = address;
+        this.users = users;
+        this.transactions = transactions;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public long getNit() {
-        return nit;
+    public long getId() {
+        return id;
     }
 
-    public void setNit(long nit) {
-        this.nit= nit;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,12 +64,12 @@ public class Enterprise {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDocument() {
+        return document;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDocument(String document) {
+        this.document = document;
     }
 
     public String getPhone() {
@@ -52,13 +80,58 @@ public class Enterprise {
         this.phone = phone;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public User[] getUsers() {
+        return users;
+    }
+
+    public void setUsers(User[] users) {
+        this.users = users;
+    }
+
+    public Transaction[] getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Transaction[] transactions) {
+        this.transactions = transactions;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public String toString() {
         return "Enterprise{" +
-                "id=" + nit +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
+                ", document='" + document + '\'' +
                 ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", users=" + Arrays.toString(users) +
+                ", transactions=" + Arrays.toString(transactions) +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
