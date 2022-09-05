@@ -27,10 +27,33 @@ public class Transaction {
     @Column(name="updatedat")
     private Date updatedAt;
 
-    public Transaction(float amount, String concept, Employee employee) {
+    public Transaction() {
+    }
+
+    public Transaction(long id, long id_employee, float amount, String concept, Employee employee, Date createdAT, Date updatedAt) {
+        this.id = id;
+        this.id_employee = id_employee;
         this.amount = amount;
         this.concept = concept;
         this.employee = employee;
+        this.createdAT = createdAT;
+        this.updatedAt = updatedAt;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId_employee() {
+        return id_employee;
+    }
+
+    public void setId_employee(long id_employee) {
+        this.id_employee = id_employee;
     }
 
     public float getAmount() {
@@ -49,20 +72,40 @@ public class Transaction {
         this.concept = concept;
     }
 
-    public Employee getUser() {
+    public Employee getEmployee() {
         return employee;
     }
 
-    public void setUser(Employee user) {
-        this.employee = user;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Date getCreatedAT() {
+        return createdAT;
+    }
+
+    public void setCreatedAT(Date createdAT) {
+        this.createdAT = createdAT;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
-                "amount=" + amount +
+                "id=" + id +
+                ", id_employee=" + id_employee +
+                ", amount=" + amount +
                 ", concept='" + concept + '\'' +
-                ", employee=" + employee.getName() +
+                ", employee=" + employee +
+                ", createdAT=" + createdAT +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

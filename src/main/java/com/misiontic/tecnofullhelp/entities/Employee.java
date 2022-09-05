@@ -28,11 +28,24 @@ public class Employee {
     @Column(name="updatedat")
     private Date updatedAt;
 
-   public Employee(String name, String email, Enterprise enterprise, Enum_role role) {
-        this.name = name;
+    public Employee() {
+    }
+
+    public Employee( String name, String email, Enterprise enterprise, Enum_role role, Date createdAT, Date updatedAt) {
+         this.name = name;
         this.email = email;
         this.enterprise = enterprise;
         this.role = role;
+        this.createdAT = createdAT;
+        this.updatedAt = updatedAt;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -67,13 +80,32 @@ public class Employee {
         this.role = role;
     }
 
+    public Date getCreatedAT() {
+        return createdAT;
+    }
+
+    public void setCreatedAT(Date createdAT) {
+        this.createdAT = createdAT;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", enterprise=" + enterprise.getName() +
                 ", role=" + role +
+                ", createdAT=" + createdAT +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

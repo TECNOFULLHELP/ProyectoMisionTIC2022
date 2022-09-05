@@ -9,8 +9,7 @@ import java.util.List;
 
 @RestController
 public class EnterpriseController {
-
-    EnterpriseService enterpriseService;
+    private EnterpriseService enterpriseService;
 
     public EnterpriseController(EnterpriseService enterpriseService){
         this.enterpriseService = enterpriseService;

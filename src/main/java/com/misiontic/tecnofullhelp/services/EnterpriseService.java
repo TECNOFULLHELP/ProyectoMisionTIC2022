@@ -3,7 +3,6 @@ package com.misiontic.tecnofullhelp.services;
 import com.misiontic.tecnofullhelp.entities.Enterprise;
 import com.misiontic.tecnofullhelp.repositories.EnterpriseRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
