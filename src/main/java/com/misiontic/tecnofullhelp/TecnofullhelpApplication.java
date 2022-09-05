@@ -3,11 +3,11 @@ package com.misiontic.tecnofullhelp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//@SpringBootApplication
+@SpringBootApplication
 public class TecnofullhelpApplication {
 
 	public static void main(String[] args) {
-        //SpringApplication.run(TecnofullhelpApplication.class, args);
+        SpringApplication.run(TecnofullhelpApplication.class, args);
 		//tarea 1
 
 		System.out.println("mi primer commit, Adriana ");
