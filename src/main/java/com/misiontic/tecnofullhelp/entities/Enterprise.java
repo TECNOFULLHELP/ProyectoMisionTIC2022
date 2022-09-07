@@ -23,8 +23,8 @@ public class Enterprise {
     @Column(name = "address", nullable = false)
     private String address;
     @OneToMany
-    @JoinColumn(name = "users")
-    private User[]  users;
+    @JoinColumn(name = "employee")
+    private Employee[]  employees;
     @OneToMany
     @JoinColumn(name = "transactions")
     private Transaction[] transactions;
@@ -36,13 +36,13 @@ public class Enterprise {
     public Enterprise() {
     }
 
-    public Enterprise(long id, String name, String document, String phone, String address, User[] users, Transaction[] transactions, Date createdAt, Date updatedAt) {
+    public Enterprise(long id, String name, String document, String phone, String address, Employee [] employees, Transaction[] transactions, Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
         this.document = document;
         this.phone = phone;
         this.address = address;
-        this.users = users;
+        this.employees = employees;
         this.transactions = transactions;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -88,12 +88,12 @@ public class Enterprise {
         this.address = address;
     }
 
-    public User[] getUsers() {
-        return users;
+    public Employee[] getEmployees() {
+        return employees;
     }
 
-    public void setUsers(User[] users) {
-        this.users = users;
+    public void setEmployees(Employee[] employees) {
+        this.employees = employees;
     }
 
     public Transaction[] getTransactions() {
@@ -128,7 +128,7 @@ public class Enterprise {
                 ", document='" + document + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", users=" + Arrays.toString(users) +
+                ", employees=" + Arrays.toString(employees) +
                 ", transactions=" + Arrays.toString(transactions) +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
