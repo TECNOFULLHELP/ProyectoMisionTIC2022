@@ -1,16 +1,19 @@
 package com.misiontic.tecnofullhelp.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 @Entity
+@Table(name="transaction")
+@JsonIgnoreProperties("employee")
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column(name="id_employee")
-    private long id_employee;
+    private Long id;
+
     @Column(name="amount")
     private float amount;
 
@@ -18,7 +21,7 @@ public class Transaction {
     private String concept;
 
     @ManyToOne
-    @JoinColumn(name="id", insertable = false, updatable = false)
+    @JoinColumn(name="employee_id", insertable = false, updatable = false)
     private Employee employee;
 
     @Column(name="createdat")
@@ -30,30 +33,12 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(long id, long id_employee, float amount, String concept, Employee employee, Date createdAT, Date updatedAt) {
-        this.id = id;
-        this.id_employee = id_employee;
+    public Transaction(float amount, String concept, Employee employee, Date createdAT, Date updatedAt) {
         this.amount = amount;
         this.concept = concept;
         this.employee = employee;
         this.createdAT = createdAT;
         this.updatedAt = updatedAt;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getId_employee() {
-        return id_employee;
-    }
-
-    public void setId_employee(long id_employee) {
-        this.id_employee = id_employee;
     }
 
     public float getAmount() {
@@ -100,7 +85,6 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
-                ", id_employee=" + id_employee +
                 ", amount=" + amount +
                 ", concept='" + concept + '\'' +
                 ", employee=" + employee +

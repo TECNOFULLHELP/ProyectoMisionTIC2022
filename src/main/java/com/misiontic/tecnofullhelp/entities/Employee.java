@@ -8,17 +8,21 @@ import java.util.List;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
+
     @Column(name="name")
     private String name;
+
     @Column(name="email")
     private String email;
+
     @ManyToOne
-    @JoinColumn(name="id", insertable = false, updatable = false)
+    @JoinColumn(name="enterprise_id", insertable = false, updatable = false)
     private Enterprise enterprise;
 
     @OneToMany(mappedBy = "employee")
     private List<Transaction> listTransaction;
+
     @Column(name="role")
     private Enum_role role;
 
@@ -31,21 +35,14 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee( String name, String email, Enterprise enterprise, Enum_role role, Date createdAT, Date updatedAt) {
-         this.name = name;
+    public Employee(String name, String email, Enterprise enterprise, List<Transaction> listTransaction, Enum_role role, Date createdAT, Date updatedAt) {
+        this.name = name;
         this.email = email;
         this.enterprise = enterprise;
+        this.listTransaction = listTransaction;
         this.role = role;
         this.createdAT = createdAT;
         this.updatedAt = updatedAt;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -70,6 +67,14 @@ public class Employee {
 
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
+    }
+
+    public List<Transaction> getListTransaction() {
+        return listTransaction;
+    }
+
+    public void setListTransaction(List<Transaction> listTransaction) {
+        this.listTransaction = listTransaction;
     }
 
     public Enum_role getRole() {
@@ -102,7 +107,8 @@ public class Employee {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", enterprise=" + enterprise.getName() +
+                ", enterprise=" + enterprise +
+                ", listTransaction=" + listTransaction +
                 ", role=" + role +
                 ", createdAT=" + createdAT +
                 ", updatedAt=" + updatedAt +
