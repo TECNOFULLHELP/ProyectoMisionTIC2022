@@ -1,59 +1,57 @@
 package com.misiontic.tecnofullhelp.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "empresa")
+@Table(name="enterprise")
 public class Enterprise {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
-    private long id;
-    @Column(name = "name", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name="nit")
+    private Long nit;
+
+    @Column(name="name")
     private String name;
-    @Column(name = "document", unique = true)
-    private String document;
-    @Column(name = "phone", nullable = false)
-    private String phone;
-    @Column(name = "address", nullable = false)
+
+    @Column(name="address")
     private String address;
-    @OneToMany
-    @JoinColumn(name = "employee")
-    private Employee[]  employees;
-    @OneToMany
-    @JoinColumn(name = "transactions")
-    private Transaction[] transactions;
-    @Column(name = "create_At", nullable = false)
-    private Date createdAt;
-    @Column(name = "update_At", nullable = false)
-    private Date updatedAt;
+
+    @Column(name="phone")
+    private String phone;
+
+    @OneToMany(mappedBy = "enterprise")
+    private List<Employee> listEmployee;
+
+    @Column(name="createdat")
+    private LocalDate createdAT;
+
+    @Column(name="updatedat")
+    private LocalDate updatedAt;
+
 
     public Enterprise() {
     }
 
-    public Enterprise(long id, String name, String document, String phone, String address, Employee [] employees, Transaction[] transactions, Date createdAt, Date updatedAt) {
-        this.id = id;
+    public Enterprise(Long nit, String name, String address, String phone, List<Employee> listEmployee, LocalDate createdAT, LocalDate updatedAt) {
+        this.nit = nit;
         this.name = name;
-        this.document = document;
-        this.phone = phone;
         this.address = address;
-        this.employees = employees;
-        this.transactions = transactions;
-        this.createdAt = createdAt;
+        this.phone = phone;
+        this.listEmployee = listEmployee;
+        this.createdAT = createdAT;
         this.updatedAt = updatedAt;
     }
 
-    public long getId() {
-        return id;
+    public Long getNit() {
+        return nit;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setNit(Long nit) {
+        this.nit = nit;
     }
 
     public String getName() {
@@ -64,12 +62,12 @@ public class Enterprise {
         this.name = name;
     }
 
-    public String getDocument() {
-        return document;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhone() {
@@ -80,43 +78,27 @@ public class Enterprise {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
+    public List<Employee> getListEmployee() {
+        return listEmployee;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setListEmployee(List<Employee> listEmployee) {
+        this.listEmployee = listEmployee;
     }
 
-    public Employee[] getEmployees() {
-        return employees;
+    public LocalDate getCreatedAT() {
+        return createdAT;
     }
 
-    public void setEmployees(Employee[] employees) {
-        this.employees = employees;
+    public void setCreatedAT(LocalDate createdAT) {
+        this.createdAT = createdAT;
     }
 
-    public Transaction[] getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -124,13 +106,12 @@ public class Enterprise {
     public String toString() {
         return "Enterprise{" +
                 "id=" + id +
+                ", nit=" + nit +
                 ", name='" + name + '\'' +
-                ", document='" + document + '\'' +
-                ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", employees=" + Arrays.toString(employees) +
-                ", transactions=" + Arrays.toString(transactions) +
-                ", createdAt=" + createdAt +
+                ", phone='" + phone + '\'' +
+                ", listEmployee=" + listEmployee +
+                ", createdAT=" + createdAT +
                 ", updatedAt=" + updatedAt +
                 '}';
     }

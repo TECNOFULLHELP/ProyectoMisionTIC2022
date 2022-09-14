@@ -1,18 +1,44 @@
 package com.misiontic.tecnofullhelp.entities;
 
 
-import com.misiontic.tecnofullhelp.entities.Employee;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+import java.util.Date;
+@Entity
+@Table(name="transaction")
+@JsonIgnoreProperties("employee")
 public class Transaction {
 
-    private float amount;
-    private String concept;
-    Employee user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public Transaction(float amount, String concept, Employee employee) {
+    @Column(name="amount")
+    private float amount;
+
+    @Column(name="concept")
+    private String concept;
+
+    @ManyToOne
+    @JoinColumn(name="employee_id", insertable = false, updatable = false)
+    private Employee employee;
+
+    @Column(name="createdat")
+    private Date createdAT;
+
+    @Column(name="updatedat")
+    private Date updatedAt;
+
+    public Transaction() {
+    }
+
+    public Transaction(float amount, String concept, Employee employee, Date createdAT, Date updatedAt) {
         this.amount = amount;
         this.concept = concept;
-        this.user = employee;
+        this.employee = employee;
+        this.createdAT = createdAT;
+        this.updatedAt = updatedAt;
     }
 
     public float getAmount() {
@@ -31,20 +57,39 @@ public class Transaction {
         this.concept = concept;
     }
 
-    public Employee getUser() {
-        return user;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setUser(Employee user) {
-        this.user = user;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Date getCreatedAT() {
+        return createdAT;
+    }
+
+    public void setCreatedAT(Date createdAT) {
+        this.createdAT = createdAT;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
-                "amount=" + amount +
+                "id=" + id +
+                ", amount=" + amount +
                 ", concept='" + concept + '\'' +
-                ", employee=" + user.getName() +
+                ", employee=" + employee +
+                ", createdAT=" + createdAT +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

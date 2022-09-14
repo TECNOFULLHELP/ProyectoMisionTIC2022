@@ -7,10 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TecnofullhelpApplication {
 
 	public static void main(String[] args) {
-        SpringApplication.run(TecnofullhelpApplication.class, args);
-		//tarea 1
+		SpringApplication.run(TecnofullhelpApplication.class, args);
 
-		System.out.println("mi primer commit, Adriana ");
 
 	}
 
