@@ -1,16 +1,17 @@
 package com.misiontic.tecnofullhelp.services;
 
+import com.misiontic.tecnofullhelp.dto.EnterpriseDto;
 import com.misiontic.tecnofullhelp.entities.Enterprise;
 import com.misiontic.tecnofullhelp.repositories.EnterpriseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EnterpriseService {
-    @Autowired
-    private EnterpriseRepository enterpriseRepository;
+
+    private final EnterpriseRepository enterpriseRepository;
 
     public EnterpriseService(EnterpriseRepository enterpriseRepository){
         this.enterpriseRepository=enterpriseRepository;
@@ -22,10 +23,24 @@ public class EnterpriseService {
     }
 
     //Metodo crea un nuevo registro en entidad Enterprise
-    public Enterprise createEnterprise(Enterprise newEnterprise){
-        return this.enterpriseRepository.save(newEnterprise);
-    }
+    public Enterprise createEnterprise(EnterpriseDto enterprise){
+        try{
+            Enterprise newEnterprise = new Enterprise();
+            if(enterprise.getName().isEmpty()){
+                return null;
+            }
+            newEnterprise.setAddress(enterprise.getAddress());
+            newEnterprise.setNit(enterprise.getNit());
+            newEnterprise.setName(enterprise.getName());
+            newEnterprise.setPhone(enterprise.getPhone());
+            newEnterprise.setCreatedAT(LocalDate.now());
+            return this.enterpriseRepository.save(newEnterprise);
 
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
     //Metodo valida si existe un registro por id en entidad Enterprise
     public boolean existByIdEnterprise (Long id){
         return enterpriseRepository.existsById(id);
@@ -42,13 +57,13 @@ public class EnterpriseService {
     }
 
     //Metodo edita un registro por id en entidad Enterprise
-    public Enterprise updateEnterprise(Long id, Enterprise enterprise){
+    public Enterprise updateEnterprise(Long id, EnterpriseDto enterprise){
         Enterprise auxEnterprise = enterpriseRepository.findById(id).orElse(null);
         auxEnterprise.setNit(enterprise.getNit());
         auxEnterprise.setName(enterprise.getName());
         auxEnterprise.setAddress(enterprise.getAddress());
         auxEnterprise.setPhone(enterprise.getPhone());
-        auxEnterprise.setUpdatedAt(enterprise.getUpdatedAt());
+        auxEnterprise.setUpdatedAt(LocalDate.now());
         enterpriseRepository.save(auxEnterprise);
         return auxEnterprise;
     }

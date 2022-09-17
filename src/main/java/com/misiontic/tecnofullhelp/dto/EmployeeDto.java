@@ -1,42 +1,28 @@
-package com.misiontic.tecnofullhelp.entities;
+package com.misiontic.tecnofullhelp.dto;
 
-import javax.persistence.*;
+import com.misiontic.tecnofullhelp.entities.Enterprise;
+import com.misiontic.tecnofullhelp.entities.Enum_role;
+import com.misiontic.tecnofullhelp.entities.Transaction;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeDto {
     private Long id;
-
-    @Column(name="name")
     private String name;
-
-    @Column(name="email")
     private String email;
-
-    @ManyToOne
-    @JoinColumn(name="enterprise_id")
     private Enterprise enterprise;
-
-    @OneToMany(mappedBy = "employee")
     private List<Transaction> listTransaction;
-
-    @Column(name="role")
     private Enum_role role;
-
-    @Column(name="createdat")
-    private LocalDateTime createdAT;
-
-    @Column(name="updatedat")
+    private LocalDateTime  createdAT;
     private LocalDateTime updatedAt;
 
-    public Employee() {
+    public EmployeeDto() {
     }
 
-    public Employee(String name, String email, Enterprise enterprise, List<Transaction> listTransaction, Enum_role role, LocalDateTime createdAT, LocalDateTime updatedAt) {
+    public EmployeeDto(Long id, String name, String email, Enterprise enterprise, List<Transaction> listTransaction, Enum_role role, LocalDateTime createdAT, LocalDateTime updatedAt) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.enterprise = enterprise;
@@ -48,6 +34,10 @@ public class Employee {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -108,7 +98,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "EmployeeDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
