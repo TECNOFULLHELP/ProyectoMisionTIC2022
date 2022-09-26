@@ -11,9 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 	public static void main(String[] args) {
         SpringApplication.run(TecnofullhelpApplication.class, args);
-		//tarea 5
-
-		Enterprise empresa1 = new Enterprise();
+		//master
 
 
 	}
