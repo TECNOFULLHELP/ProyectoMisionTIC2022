@@ -124,7 +124,15 @@ public class FrontController {
     @GetMapping("/transacciones")
     public String transacciones(Model model){
         List<Transaction> transactionList = this.transactionService.getAllTransaction();
+
+        double sumatoria = 0.0;
+
+        for (Transaction transaction:transactionList){
+            sumatoria += transaction.getAmount();
+        }
+
         model.addAttribute("transacciones", transactionList);
+        model.addAttribute("sumatoriaDeTransacciones", sumatoria);
         return "transacciones";
     }
 
