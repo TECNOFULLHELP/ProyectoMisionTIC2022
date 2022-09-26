@@ -1,39 +1,23 @@
-package com.misiontic.tecnofullhelp.entities;
+package com.misiontic.tecnofullhelp.dto;
 
+import com.misiontic.tecnofullhelp.entities.Employee;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
-@Entity
-@Table(name="transaction")
-public class Transaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TransactionDto {
     private Long id;
-
-    @Column(name="amount")
     private float amount;
-
-    @Column(name="concept")
     private String concept;
-
-    @ManyToOne
-    @JoinColumn(name="employee_id")
     private Employee employee;
-
-    @Column(name="createdat")
     private LocalDate createdAT;
-
-    @Column(name="updatedat")
     private LocalDate updatedAt;
 
-    public Transaction() {
+    public TransactionDto() {
     }
 
-    public Transaction(float amount, String concept, Employee employee, LocalDate createdAT, LocalDate updatedAt) {
+    public TransactionDto(Long id, float amount, String concept, Employee employee, LocalDate createdAT, LocalDate updatedAt) {
+        this.id = id;
         this.amount = amount;
         this.concept = concept;
         this.employee = employee;
@@ -43,6 +27,10 @@ public class Transaction {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public float getAmount() {
@@ -87,7 +75,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "TransactionDto{" +
                 "id=" + id +
                 ", amount=" + amount +
                 ", concept='" + concept + '\'' +
@@ -97,3 +85,4 @@ public class Transaction {
                 '}';
     }
 }
+

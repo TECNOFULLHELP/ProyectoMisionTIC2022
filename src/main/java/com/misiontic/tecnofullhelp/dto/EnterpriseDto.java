@@ -1,42 +1,24 @@
-package com.misiontic.tecnofullhelp.entities;
+package com.misiontic.tecnofullhelp.dto;
 
-import javax.persistence.*;
+import com.misiontic.tecnofullhelp.entities.Employee;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name="enterprise")
-public class Enterprise {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EnterpriseDto {
     private Long id;
-
-    @Column(name="nit")
     private Long nit;
-
-    @Column(name="name")
     private String name;
-
-    @Column(name="address")
     private String address;
-
-    @Column(name="phone")
     private String phone;
-
-    @OneToMany(mappedBy = "enterprise")
     private List<Employee> listEmployee;
-
-    @Column(name="createdat")
     private LocalDate createdAT;
-
-    @Column(name="updatedat")
     private LocalDate updatedAt;
 
-
-    public Enterprise() {
+    public EnterpriseDto() {
     }
 
-    public Enterprise( Long nit, String name, String address, String phone, List<Employee> listEmployee, LocalDate createdAT, LocalDate updatedAt) {
+    public EnterpriseDto(Long id, Long nit, String name, String address, String phone, List<Employee> listEmployee, LocalDate createdAT, LocalDate updatedAt) {
+        this.id = id;
         this.nit = nit;
         this.name = name;
         this.address = address;
@@ -49,6 +31,11 @@ public class Enterprise {
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getNit() {
         return nit;
     }
@@ -81,6 +68,14 @@ public class Enterprise {
         this.phone = phone;
     }
 
+    public List<Employee> getListEmployee() {
+        return listEmployee;
+    }
+
+    public void setListEmployee(List<Employee> listEmployee) {
+        this.listEmployee = listEmployee;
+    }
+
     public LocalDate getCreatedAT() {
         return createdAT;
     }
@@ -99,7 +94,7 @@ public class Enterprise {
 
     @Override
     public String toString() {
-        return "Enterprise{" +
+        return "EnterpriseDto{" +
                 "id=" + id +
                 ", nit=" + nit +
                 ", name='" + name + '\'' +

@@ -1,16 +1,18 @@
 package com.misiontic.tecnofullhelp.services;
 
+import com.misiontic.tecnofullhelp.dto.EmployeeDto;
 import com.misiontic.tecnofullhelp.entities.Employee;
+import com.misiontic.tecnofullhelp.entities.Enterprise;
 import com.misiontic.tecnofullhelp.repositories.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EmployeeService {
-    @Autowired
-    private EmployeeRepository employeeRepository;
+
+    private final EmployeeRepository employeeRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository){
         this.employeeRepository=employeeRepository;
@@ -22,8 +24,23 @@ public class EmployeeService {
     }
 
     //Metodo crea un nuevo registro en entidad Employee
-    public Employee createEmployee(Employee newEmployee){
-        return this.employeeRepository.save(newEmployee);
+    public Employee createEmployee(EmployeeDto employee){
+        try{
+            Employee newEmployee = new Employee();
+            if(employee.getName().isEmpty()){
+                return null;
+            }
+            newEmployee.setName(employee.getName());
+            newEmployee.setEmail(employee.getEmail());
+            newEmployee.setEnterprise(employee.getEnterprise());
+            newEmployee.setRole(employee.getRole());
+            newEmployee.setCreatedAT(LocalDateTime.now());
+            return this.employeeRepository.save(newEmployee);
+
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
     //Metodo valida si existe un registro por id en entidad Employee
@@ -42,12 +59,12 @@ public class EmployeeService {
     }
 
     //Metodo edita un registro por id en entidad Employee
-    public Employee updateEmployee(Long id, Employee employee){
+    public Employee updateEmployee(Long id, EmployeeDto employee){
         Employee auxEmployee= employeeRepository.findById(id).orElse(null);
         auxEmployee.setName(employee.getName());
         auxEmployee.setEmail(employee.getEmail());
         auxEmployee.setRole(employee.getRole());
-        auxEmployee.setUpdatedAt(employee.getUpdatedAt());
+        auxEmployee.setUpdatedAt(LocalDateTime.now());
         employeeRepository.save(auxEmployee);
         return auxEmployee;
     }

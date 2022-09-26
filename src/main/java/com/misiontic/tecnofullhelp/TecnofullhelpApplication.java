@@ -1,12 +1,10 @@
 package com.misiontic.tecnofullhelp;
 
-import com.misiontic.tecnofullhelp.entities.Employee;
 import com.misiontic.tecnofullhelp.entities.Enterprise;
-import com.misiontic.tecnofullhelp.entities.Enum_role;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDate;
+
 
 @SpringBootApplication
 	public class TecnofullhelpApplication {
@@ -15,6 +13,7 @@ import java.time.LocalDate;
         SpringApplication.run(TecnofullhelpApplication.class, args);
 		//tarea 5
 
+		Enterprise empresa1 = new Enterprise();
 
 
 	}

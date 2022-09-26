@@ -1,5 +1,6 @@
 package com.misiontic.tecnofullhelp.controllers;
 
+import com.misiontic.tecnofullhelp.dto.EmployeeDto;
 import com.misiontic.tecnofullhelp.entities.Employee;
 import com.misiontic.tecnofullhelp.entities.Mensaje;
 import com.misiontic.tecnofullhelp.services.EmployeeService;
@@ -12,24 +13,24 @@ import java.util.List;
 @RestController
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService){
         this.employeeService=employeeService;
     }
 
-    @GetMapping("/listarEmpleados")
+    @GetMapping("/empleado/listar")
     public List<Employee> getAllEmployee(){
         return this.employeeService.getAllEmployee();
     }
 
-    @PostMapping("/crearEmpleado")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee newEmployee){
+    @PostMapping("/empleado/crear")
+    public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeDto newEmployee){
         this.employeeService.createEmployee(newEmployee);
         return new ResponseEntity(new Mensaje("Registro creado correctamente"),HttpStatus.OK);
     }
 
-    @GetMapping("/empleado/{id}")
+    @GetMapping("/empleado/buscar/{id}")
     public ResponseEntity<Employee> findEmployee(@PathVariable("id")Long id){
         if(!employeeService.existByIdEmployee(id)){
             return new ResponseEntity(new Mensaje("El Id del empleado No existe"), HttpStatus.NOT_FOUND);
@@ -39,7 +40,7 @@ public class EmployeeController {
         }
     }
 
-    @DeleteMapping("/eliminarEmpleado/{id}")
+    @DeleteMapping("/empleado/eliminar/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable ("id") Long id){
         if(!employeeService.existByIdEmployee(id)){
             return new ResponseEntity(new Mensaje("El empleado no existe"),HttpStatus.NOT_FOUND );
@@ -50,8 +51,8 @@ public class EmployeeController {
 
     }
 
-    @PatchMapping("/editarEmpleado/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable ("id") Long id, @RequestBody Employee employee) {
+    @PatchMapping("/empleado/editar/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable ("id") Long id, @RequestBody EmployeeDto employee) {
         if(!employeeService.existByIdEmployee(id)){
             return new ResponseEntity(new Mensaje("El empleado no existe"),HttpStatus.NOT_FOUND);
         }else{
