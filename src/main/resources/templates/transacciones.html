@@ -95,13 +95,9 @@
 
         </div>
 
-        <h1 style="color:white;">
-            <th:block th:text="${sumatoriaDeTransacciones}"/>
-        </h1>
-
         <form action="">
 
-            <input type="text" placeholder="Total" class="box">
+            <label class="box"> TOTAL </label><label class="box"> $ </label><label th:text="${#numbers.formatDecimal(sumatoriaDeTransacciones, 1, 2)}" type="text"  class="box"></label>
 
         </form>
 
