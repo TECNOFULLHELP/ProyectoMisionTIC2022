@@ -1,6 +1,8 @@
 package com.misiontic.tecnofullhelp.dto;
 
 import com.misiontic.tecnofullhelp.entities.Employee;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class TransactionDto {
@@ -8,13 +10,13 @@ public class TransactionDto {
     private float amount;
     private String concept;
     private Employee employee;
-    private Date createdAT;
-    private Date updatedAt;
+    private LocalDate createdAT;
+    private LocalDate updatedAt;
 
     public TransactionDto() {
     }
 
-    public TransactionDto(Long id, float amount, String concept, Employee employee, Date createdAT, Date updatedAt) {
+    public TransactionDto(Long id, float amount, String concept, Employee employee, LocalDate createdAT, LocalDate updatedAt) {
         this.id = id;
         this.amount = amount;
         this.concept = concept;
@@ -55,19 +57,19 @@ public class TransactionDto {
         this.employee = employee;
     }
 
-    public Date getCreatedAT() {
+    public LocalDate getCreatedAT() {
         return createdAT;
     }
 
-    public void setCreatedAT(Date createdAT) {
+    public void setCreatedAT(LocalDate createdAT) {
         this.createdAT = createdAT;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 

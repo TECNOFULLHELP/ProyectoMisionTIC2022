@@ -4,10 +4,10 @@ package com.misiontic.tecnofullhelp.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name="transaction")
-@JsonIgnoreProperties("employee")
 public class Transaction {
 
     @Id
@@ -21,24 +21,28 @@ public class Transaction {
     private String concept;
 
     @ManyToOne
-    @JoinColumn(name="employee_id", insertable = false, updatable = false)
+    @JoinColumn(name="employee_id")
     private Employee employee;
 
     @Column(name="createdat")
-    private Date createdAT;
+    private LocalDate createdAT;
 
     @Column(name="updatedat")
-    private Date updatedAt;
+    private LocalDate updatedAt;
 
     public Transaction() {
     }
 
-    public Transaction(float amount, String concept, Employee employee, Date createdAT, Date updatedAt) {
+    public Transaction(float amount, String concept, Employee employee, LocalDate createdAT, LocalDate updatedAt) {
         this.amount = amount;
         this.concept = concept;
         this.employee = employee;
         this.createdAT = createdAT;
         this.updatedAt = updatedAt;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public float getAmount() {
@@ -65,19 +69,19 @@ public class Transaction {
         this.employee = employee;
     }
 
-    public Date getCreatedAT() {
+    public LocalDate getCreatedAT() {
         return createdAT;
     }
 
-    public void setCreatedAT(Date createdAT) {
+    public void setCreatedAT(LocalDate createdAT) {
         this.createdAT = createdAT;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 

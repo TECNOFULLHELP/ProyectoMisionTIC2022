@@ -2,73 +2,100 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TecnoFullHelp</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{friend-code}</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <!-- hoja de estilos  -->
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
+
 <body>
-<div class="d-flex" id="wrapper">
-    <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light"><h1 class="fw-lighter fw-bolder fst-italic">TecnoFullHelp</h1></div>
-        <div class="list-group list-group-flush">
-            <a th:href="@{/empresas}" class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Empresas</a>
-            <a th:href="@{/empleados}" class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Empleados</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Transacciones</a>
+    
+<!-- menú principal  -->
 
-        </div>
-    </div>
-    <!-- Page content wrapper-->
-    <div id="page-content-wrapper" class="w-100">
-        <!-- Top navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <div class="container-fluid">
-                <!--<button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>-->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                        <li class="nav-item active"><a th:href="@{/home}" class="nav-link" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Noticias</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Consultar</a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a th:href="@{/empresas}" class="dropdown-item" href="#!">Empresas</a>
-                                <a th:href="@{/empleados}" class="dropdown-item" href="#!">Empleados</a>
-                                <a class="dropdown-item" href="#!">Transacciones</a>
-                                <div class="dropdown-divider"></div>
-                                <a th:href="@{/}" class="dropdown-item" href="#!">Salir</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Page content-->
-        <div class="container-fluid">
-            <h1 class="mt-4">Empresas</h1>
-            <form class="d-flex justify-content-center mb-3"
-             action="#" th:action="@{/add}" method="post" th:object="${enterprise}"
-            >
-                <div class="mb-3">
-                    <label for="nit" class="form-label">Nit</label>
-                    <input th:field="*{nit}" type="number" class="form-control" id="nit">
-                    <label for="name" class="form-label">Nombre</label>
-                    <input th:field="*{name}" type="text" class="form-control" id="name">
-                    <label for="address" class="form-label">Dirección</label>
-                    <input th:field="*{address}" type="text" class="form-control" id="address">
-                    <label for="phone" class="form-label">Teléfono</label>
-                    <input th:field="*{phone}" type="text" class="form-control" id="phone">
-                    <div class="d-grid mt-4 gap-2 col-6 mx-auto">
-                        <button class="btn btn-outline-primary" type="submit">Guardar</button>
-                    </div>
-                </div>
+<header>
 
-            </form>
-        </div>
+    <div class="user">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-desktop-analytics" width="80" height="80" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <rect x="3" y="4" width="18" height="12" rx="1" />
+            <path d="M7 20h10" />
+            <path d="M9 16v4" />
+            <path d="M15 16v4" />
+            <path d="M9 12v-4" />
+            <path d="M12 12v-1" />
+            <path d="M15 12v-2" />
+            <path d="M12 12v-1" />
+        </svg>
+        <h3 class="name">{friend-code}</h3>
+        <p class="post">ciclo 3</p>
     </div>
+
+    <nav class="navbar">
+        <ul>
+            <li><a th:href="@{/home}" href="#inicio">inicio</a></li>
+            <li><a th:href="@{/transacciones}" href="#ingreso_egreso">ingresos y egresos</a></li>
+            <li><a th:href="@{/empleados}" href="#usuarios">usuarios</a></li>
+            <li><a th:href="@{/empresas}" href="#empresas">empresas</a></li>
+            <li><a th:href="@{/}" href="#salir">salir</a></li>
+            
+        </ul>
+    </nav>
+
+</header>
+
+<!-- fin menú principal -->
+
+<div id="menu" class="fas fa-bars"></div>
+
+<!-- inicio sección ingresos y gastos  -->
+
+<section class="contact" id="contact">
+
+<h1 class="heading"> <span>sistema de gestión de ingresos y gastos</span></h1>
+
+<div class="row">
+
+    <div class="content">
+
+        <h3 class="title">Nueva Empresa</h3>
+        
+        <form action="" th:action="@{/add}" method="post" th:object="${enterprise}">
+		
+			<input th:field="*{nit}" type="number" placeholder="Nit" class="box" required>
+            <input th:field="*{name}" type="text" placeholder="Nombre" class="box" required>
+            <input th:field="*{address}" type="text" placeholder="Dirección" class="box" required>
+            <input th:field="*{phone}" type="text" placeholder="Teléfono" class="box" required>
+            <button type="submit" class="btn">Guardar</button>
+    
+        </form>
+
+    </div>
+
+
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+</section>
+
+
+<!-- scroll top button  -->
+
+<a href="#home" class="top">
+    <img src="images/scroll-top-img.png" alt="">
+</a>
+
+
+
+<!-- jquery cdn link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+
 </body>
 </html>

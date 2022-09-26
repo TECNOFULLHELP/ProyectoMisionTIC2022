@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    
+
 <!-- menú principal  -->
 
 <header>
@@ -42,7 +42,7 @@
             <li><a th:href="@{/empleados}" href="#usuarios">usuarios</a></li>
             <li><a th:href="@{/empresas}" href="#empresas">empresas</a></li>
             <li><a th:href="@{/}" href="#salir">salir</a></li>
-            
+
         </ul>
     </nav>
 
@@ -52,60 +52,41 @@
 
 <div id="menu" class="fas fa-bars"></div>
 
-<!-- inicio tabla  -->
+<!-- inicio sección ingresos y gastos  -->
 
-<section class="tabla_ingreso" id="tabla_ingreso">
+<section class="contact" id="contact">
 
-<h1 class="heading"> <span>sistema de gestión de ingresos y gastos</span></h1>
+    <h1 class="heading"> <span>sistema de gestión de ingresos y gastos</span></h1>
 
-<div class="row">
+    <div class="row">
 
-    <div class="content">
+        <div class="content">
 
-        <h3 class="title">Usuarios</h3>
-		<form action="/addEmpleado">
-            <button type="submit" class="btn">Crear nuevo</button>
-        </form>
-        <div class="tabla">
-            <table>
-                <thead>
-                    <tr>
-						<th>#</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Empresa</th>
-						<th>Role</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="empleado: ${empleados}">
-                    <th scope="row" th:text="${empleado.id}"></th>
-                    <td th:text="${empleado.name}"></td>
-                    <td th:text="${empleado.email}"></td>
-                    <td th:text="${empleado.enterprise.getName()}"></td>
-                    <td th:text="${empleado.role}"></td>
-                    <td><a th:href="@{/empleado/editar/}+${empleado.id}">✍</a></td>
-                    <td><a th:onclick="eliminarEmpleado([[${empleado.id}]])">❌</a></td>
-                </tr>
-                </tbody>
-            </table>
+            <h3 class="title">Nuevo Ingreso o Egreso</h3>
+
+            <form action="" th:action="@{/addTransaccion}" method="post" th:object="${transaction}">
+
+                <input th:field="*{concept}" type="text" placeholder="Concepto" class="box" required>
+                <input th:field="*{amount}" type="number" placeholder="Monto" class="box" required>
+                <select th:field="*{employee}" id="employee" class="box" required>
+                    <option value="">Elige un USUARIO</option>
+                    <option th:each="empleado : ${employee}"
+                            th:value="${empleado.id}"
+                            th:text="${empleado.name}">
+                    </option>
+                </select>
+
+                <button type="submit" class="btn">Guardar</button>
+
+            </form>
+
         </div>
-
-        <form action="">
-
-            <input type="text"  class="box">
-
-        </form>
 
 
     </div>
 
-
-</div>
-
 </section>
+
 
 <!-- scroll top button  -->
 
@@ -116,13 +97,10 @@
 
 
 <!-- jquery cdn link  -->
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
-<script src="js/eliminarEmpleado.js"></script>
 
 
 </body>

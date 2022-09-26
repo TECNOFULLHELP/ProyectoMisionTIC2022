@@ -74,14 +74,6 @@ public class Employee {
         this.enterprise = enterprise;
     }
 
-    public List<Transaction> getListTransaction() {
-        return listTransaction;
-    }
-
-    public void setListTransaction(List<Transaction> listTransaction) {
-        this.listTransaction = listTransaction;
-    }
-
     public Enum_role getRole() {
         return role;
     }

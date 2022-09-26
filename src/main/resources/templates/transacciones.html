@@ -37,13 +37,12 @@
 
     <nav class="navbar">
         <ul>
-            <li><a th:href="@{/home}" href="#inicio">inicio</a></li>
-            <li><a th:href="@{/transacciones}" href="#ingreso_egreso">ingresos y egresos</a></li>
-            <li><a th:href="@{/empleados}" href="#usuarios">usuarios</a></li>
-            <li><a th:href="@{/empresas}" href="#empresas">empresas</a></li>
-            <li><a th:href="@{/}" href="#salir">salir</a></li>
-            
-        </ul>
+		  <li><a th:href="@{/home}" href="#inicio">inicio</a></li>
+		  <li><a th:href="@{/transacciones}" href="#ingreso_egreso">ingresos y egresos</a></li>
+		  <li><a th:href="@{/empleados}" href="#usuarios">usuarios</a></li>
+		  <li><a th:href="@{/empresas}" href="#empresas">empresas</a></li>
+		  <li><a th:href="@{/}" href="#salir">salir</a></li>
+    </ul>
     </nav>
 
 </header>
@@ -62,43 +61,45 @@
 
     <div class="content">
 
-        <h3 class="title">Usuarios</h3>
-		<form action="/addEmpleado">
+        <h3 class="title">ingresos y egresos</h3>
+		<form action="/addTransaccion">
             <button type="submit" class="btn">Crear nuevo</button>
         </form>
         <div class="tabla">
             <table>
-                <thead>
-                    <tr>
-						<th>#</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Empresa</th>
-						<th>Role</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="empleado: ${empleados}">
-                    <th scope="row" th:text="${empleado.id}"></th>
-                    <td th:text="${empleado.name}"></td>
-                    <td th:text="${empleado.email}"></td>
-                    <td th:text="${empleado.enterprise.getName()}"></td>
-                    <td th:text="${empleado.role}"></td>
-                    <td><a th:href="@{/empleado/editar/}+${empleado.id}">✍</a></td>
-                    <td><a th:onclick="eliminarEmpleado([[${empleado.id}]])">❌</a></td>
-                </tr>
-                </tbody>
+			  <thead>
+			  <tr>
+				<th>#</th>
+				<th>concepto</th>
+				<th>monto</th>
+				<th>fecha</th>
+				<th>usuario</th>
+				<th>empresa</th>
+                <th>editar</th>
+                <th>eliminar</th>
+			  </tr>
+			  </thead>
+			  <tbody>
+			  <tr th:each="transaccion : ${transacciones}">
+				<th scope="row" th:text="${transaccion.id}"></th>
+				<td th:text="${transaccion.concept}"></td>
+				<td th:text="${#numbers.formatDecimal(transaccion.amount, 1, 2)}"></td>
+				<td th:text="${transaccion.createdAT}"></td>
+				<td th:text="${transaccion.employee.getName()}"></td>
+				<td th:text="${transaccion.employee.getEnterprise().getName()}">
+                <td><a th:href="@{transaccion/editar/}+${transaccion.id}">✍</a></td>
+                <td><a th:onclick="eliminarTransaccion([[${transaccion.id}]])">❌</a></td>
+			  </tr>
+			  </tbody>
             </table>
+
         </div>
 
         <form action="">
 
-            <input type="text"  class="box">
+            <input type="text" placeholder="Total" class="box">
 
         </form>
-
 
     </div>
 
@@ -122,8 +123,7 @@
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
-<script src="js/eliminarEmpleado.js"></script>
-
+<script src="js/eliminarTransaccion.js"></script>
 
 </body>
 </html>

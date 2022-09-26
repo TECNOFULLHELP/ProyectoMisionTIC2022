@@ -1,17 +1,25 @@
 package com.misiontic.tecnofullhelp.services;
 
+import com.misiontic.tecnofullhelp.dto.TransactionDto;
+import com.misiontic.tecnofullhelp.entities.Enterprise;
+import com.misiontic.tecnofullhelp.entities.Mensaje;
 import com.misiontic.tecnofullhelp.entities.Transaction;
+import com.misiontic.tecnofullhelp.repositories.EnterpriseRepository;
 import com.misiontic.tecnofullhelp.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.Repository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TransactionService {
-    @Autowired
-    private TransactionRepository transactionRepository;
+
+    private final TransactionRepository transactionRepository;
 
     public TransactionService(TransactionRepository transactionRepository){
         this.transactionRepository=transactionRepository;
@@ -22,9 +30,24 @@ public class TransactionService {
         return this.transactionRepository.findAll();
     }
 
+
     //Metodo crea un nuevo registro en entidad Transaction
-    public Transaction createTransaction(Transaction newTransaction){
-        return this.transactionRepository.save(newTransaction);
+    public Transaction createTransaction(TransactionDto transaction){
+        try{
+            Transaction newTransaction = new Transaction();
+            if(transaction.getConcept().isEmpty()){
+                return null;
+            }
+            newTransaction.setAmount(transaction.getAmount());
+            newTransaction.setConcept(transaction.getConcept());
+            newTransaction.setCreatedAT(LocalDate.now());
+            newTransaction.setEmployee(transaction.getEmployee());
+            return this.transactionRepository.save(newTransaction);
+
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
     //Metodo valida si existe un registro por id en entidad Transaction
@@ -43,11 +66,11 @@ public class TransactionService {
     }
 
     //Metodo edita un registro por id en entidad Transaction
-    public Transaction updateTransaction(Long id, Transaction transaction){
+    public Transaction updateTransaction(Long id, TransactionDto transaction){
         Transaction auxTransaction = transactionRepository.findById(id).orElse(null);
         auxTransaction.setConcept(transaction.getConcept());
         auxTransaction.setAmount(transaction.getAmount());
-        auxTransaction.setUpdatedAt(transaction.getUpdatedAt());
+        auxTransaction.setUpdatedAt(LocalDate.now());
         transactionRepository.save(auxTransaction);
         return auxTransaction;
     }

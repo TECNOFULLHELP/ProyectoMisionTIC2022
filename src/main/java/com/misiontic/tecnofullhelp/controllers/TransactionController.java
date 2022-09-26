@@ -1,5 +1,6 @@
 package com.misiontic.tecnofullhelp.controllers;
 
+import com.misiontic.tecnofullhelp.dto.TransactionDto;
 import com.misiontic.tecnofullhelp.entities.Employee;
 import com.misiontic.tecnofullhelp.entities.Mensaje;
 import com.misiontic.tecnofullhelp.entities.Transaction;
@@ -13,24 +14,24 @@ import java.util.List;
 @RestController
 public class TransactionController {
 
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     public TransactionController(TransactionService transactionService){
         this.transactionService=transactionService;
     }
 
-    @GetMapping("/listarTransacciones")
+    @GetMapping("/transaccion/listar")
     public List<Transaction> listTransaction(){
         return this.transactionService.getAllTransaction();
     }
 
-    @PostMapping("/crearTransaccion")
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction newTransaction){
+    @PostMapping("/transaccion/crear")
+    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDto newTransaction){
         this.transactionService.createTransaction(newTransaction);
         return new ResponseEntity(new Mensaje("Registro creado correctamente"), HttpStatus.OK);
     }
 
-    @GetMapping("/transaccion/{id}")
+    @GetMapping("/transaccion/buscar/{id}")
     public ResponseEntity<Transaction> findTransaction(@PathVariable("id")Long id){
         if(!transactionService.existTransactionById(id)){
             return new ResponseEntity(new Mensaje("La transacción No existe"), HttpStatus.NOT_FOUND);
@@ -40,7 +41,7 @@ public class TransactionController {
         }
     }
 
-    @DeleteMapping("/eliminarTransaccion/{id}")
+    @DeleteMapping("/transaccion/eliminar/{id}")
     public ResponseEntity<Transaction> deleteTransaction(@PathVariable ("id") Long id){
         if(!transactionService.existTransactionById(id)){
             return new ResponseEntity(new Mensaje("La transacción no existe"),HttpStatus.NOT_FOUND );
@@ -51,8 +52,8 @@ public class TransactionController {
 
     }
 
-    @PatchMapping("/editarTransaccion/{id}")
-    public ResponseEntity<Transaction> updateTransaction(@PathVariable ("id") Long id, @RequestBody Transaction transaction) {
+    @PatchMapping("/transaccion/editar/{id}")
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable ("id") Long id, @RequestBody TransactionDto transaction) {
         if(!transactionService.existTransactionById(id)){
             return new ResponseEntity(new Mensaje("La transaccion no existe"),HttpStatus.NOT_FOUND);
         }else{
